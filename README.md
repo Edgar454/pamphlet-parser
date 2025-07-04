@@ -1,50 +1,120 @@
-# Welcome to your Expo app 👋
+# Form Parser: Automating Member Registration
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+In our church, we love getting to know new people. To keep in touch, we ask them to fill out a form with some basic information.
 
-## Get started
+Traditionally, we would transcribe this information into an Excel sheet — a slow and error-prone process. Worse, if the device storing the data fails, we risk losing valuable and sensitive information.
 
-1. Install dependencies
+That's why we built **Form Parser**: a mobile app that fully automates the process — from form submission to secure database storage.
 
+---
+
+## 🏗️ Architecture
+
+Form Parser is composed of three main components:
+
+- **Frontend**: Built using [Expo](https://expo.dev/), it provides a smooth user experience on mobile.
+- **Parsing Logic**: Powered by the **Gemini API** and its **VLLM (Vision-Language Large Model)** capabilities, the app extracts structured data from images of filled forms.
+- **Database**: Uses **Supabase** to store and manage member data securely.
+
+---
+
+## 📱 Features
+
+The app has four main tabs:
+
+- **Home**: Upload a form, view the parsed result, make adjustments if needed, and save to the database.
+- **Recent Entries**: View and edit the most recently added members.
+- **Analytics**: Visual dashboards showing total registrations, trends over time, and distribution by location, nationality, etc.
+- **About**: Information about the app and its purpose.
+
+---
+
+## 🚀 How to Use
+
+1. Download the APK located in the `executable` folder.
+2. Install it on your Android device.
+3. Launch the app and start scanning and saving forms instantly!
+
+---
+
+## 🗂️ Project Structure
+
+```
+.
+├── .env                   # Environment variables (see below)
+├── app.json               # Expo app configuration
+├── package.json           # Project metadata and dependencies
+├── README.md
+├── app/                   # App routing and navigation
+│   ├── _layout.tsx
+│   ├── [id].tsx
+│   ├── not-found.tsx
+│   └── (tabs)/
+│       ├── index.tsx     # Home screen (form parsing)
+│       ├── recent.tsx    # Recently registered members
+│       ├── analytics.tsx # Charts and statistics
+│       └── about.tsx     # App info
+├── components/            # UI components split by feature
+│   ├── main/              # Form parsing workflow (upload, wait, result)
+│   ├── analytics/         # All analytical chart components
+│   ├── recent/            # Component for recent registrations
+│   └── ui/                # Reusable UI elements (header, animations, etc.)
+├── constants/             # Static values like colors
+├── context/               # Global state/context
+├── utils/                 # Helper modules (API calls, DB, geolocation)
+├── executable/            # Contains the compiled APK
+├── hooks/                 # Custom React hooks
+├── assets/                # Fonts and images
+└── node_modules/          # Installed dependencies
+```
+
+---
+
+## 🔐 Environment Variables
+
+Create a `.env` file in the root folder with the following keys:
+
+```env
+EXPO_PUBLIC_SUPABASE_KEY=your_supabase_anon_key
+EXPO_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
+EXPO_PUBLIC_RAPID_API_KEY=your_rapidapi_key
+```
+
+> ⚠️ These keys are public and bundled with the frontend. Do not use private secrets.
+
+You can access them in code using `process.env.EXPO_PUBLIC_GEMINI_API_KEY`, etc.
+
+---
+
+## 🛠 Running Locally
+
+1. **Install dependencies**:
    ```bash
    npm install
    ```
 
-2. Start the app
-
+2. **Start the Expo app**:
+   ```bash
+   npm start
+   ```
+   or
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+3. **Use Expo Go** on your phone or an emulator to test the app.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 👨‍💻 Modifying the Code
 
-## Get a fresh project
+- **Form parsing logic**: `components/main/`
+- **Routing/navigation**: `app/_layout.tsx`, `app/(tabs)/`
+- **Charts & visualizations**: `components/analytics/`
+- **Database & geolocation**: `utils/db.js`, `utils/geo.js`
 
-When you're ready, run:
+---
 
-```bash
-npm run reset-project
-```
+## 🎥 Demo
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+> _(You can add a link to a short demo video or animated GIF showing the app in action.)_
